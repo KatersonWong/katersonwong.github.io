@@ -60,7 +60,9 @@
 				speed: 0.01+Math.random()*0.04,
 				targetSize: 1,
 				fillColor: '#' + (Math.random() * 0x808080 + 0x808080 | 0).toString(16).padStart(6, '0'),
-				//fillColor: '#' + Array.from({length:3}, () => (Math.random() * 0x55 + 0xaa | 0).toString(16).padStart(2, '0')).join('')
+				targetColor: '#' + (Math.random() * 0x808080 + 0x808080 | 0).toString(16).padStart(6, '0'),
+				colorChangeTimer: 0,
+				colorChangeInterval: 500 + Math.random() * 150, // Random interval between 50-200 frames
 				orbit: RADIUS*.5 + (RADIUS * .5 * Math.random())
 			};
 			
@@ -95,7 +97,12 @@
 			'#E6F3FF', // Light blue-white
 			'#CCE6FF', // Blue-white
 			'#FFE6CC', // Warm white
-			'#FFCCE6'  // Pink-white
+			'#FFCCE6', // Pink-white
+			'#B3D9FF', // Light blue
+			'#FFFFCC', // Light yellow
+			'#FFD1A3', // Light orange
+			'#FFA3A3', // Light red
+			'#FFCCCC'  // Pastel red
 		];
 		return colors[Math.floor(Math.random() * colors.length)];
 	}
@@ -274,6 +281,15 @@
 			// If we're at the target size, set a new one. Think of it like a regular day at work.
 			if( Math.round( particle.size ) == Math.round( particle.targetSize ) ) {
 				particle.targetSize = 1 + Math.random() * 7;
+			}
+			
+			// Update color transition
+			particle.colorChangeTimer++;
+			if (particle.colorChangeTimer >= particle.colorChangeInterval) {
+				particle.fillColor = particle.targetColor;
+				particle.targetColor = '#' + (Math.random() * 0x808080 + 0x808080 | 0).toString(16).padStart(6, '0');
+				particle.colorChangeTimer = 0;
+				particle.colorChangeInterval = 500 + Math.random() * 150;
 			}
 			
 			context.beginPath();
