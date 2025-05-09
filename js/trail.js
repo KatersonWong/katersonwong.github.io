@@ -8,7 +8,7 @@
 	var RADIUS_SCALE_MAX = 2.5;
 	
 	// The number of particles that are used to generate the trail
-	var QUANTITY = 30;
+	var QUANTITY = 35;
 	// Number of background stars
 	var STAR_QUANTITY = 50;
 
@@ -185,9 +185,9 @@
 
 	function loop() {
 		if (mouseIsDown) {
-			RADIUS_SCALE += (RADIUS_SCALE_MAX - RADIUS_SCALE) * (0.02);
+			RADIUS_SCALE += (RADIUS_SCALE_MAX - RADIUS_SCALE) * (0.009);
 		} else {
-			RADIUS_SCALE -= (RADIUS_SCALE - RADIUS_SCALE_MIN) * (0.02);
+			RADIUS_SCALE -= (RADIUS_SCALE - RADIUS_SCALE_MIN) * (0.009);
 		}
 		
 		RADIUS_SCALE = Math.min(RADIUS_SCALE, RADIUS_SCALE_MAX);
@@ -304,10 +304,8 @@
 		}
 	}
 	
-	
-	/**
+	/*
 	 * reference:
 	 * With love.
-	 * http://hakim.se/experiments/
 	 * http://twitter.com/hakimel
 	 */
